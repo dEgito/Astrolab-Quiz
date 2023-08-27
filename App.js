@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import Routes from './src/routes';
+import { StyleSheet, Text, View } from "react-native";
+import Routes from "./src/routes";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
@@ -13,7 +13,5 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return (
-    <Routes />
-  );
+  return <Routes />;
 }
