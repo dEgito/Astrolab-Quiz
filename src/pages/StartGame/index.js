@@ -12,14 +12,25 @@ import GoldButton from "../../components/GoldButton";
 import BackgroundImage from "../../../assets/background.png";
 import ImagePlanet from "../../../assets/image_1.png";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useAuthContext } from "../../contexts/auth";
 
 export default function StartGame() {
-  const [punctuation, setPunctuation] = useState(0);
+  const navigation = useNavigation();
+  const { username, punctuation, questions, createNewQuestions, resetGame } =
+    useAuthContext();
 
   return (
     <View className="w-full h-full bg-primaryPurple pt-[15%]">
       <View className="px-[32px] h-2">
-        <LeftArrow />
+        <Pressable
+          onPress={() => {
+            resetGame();
+            navigation.goBack();
+          }}
+        >
+          <LeftArrow />
+        </Pressable>
         <Text
           className="text-[20px] text-gold drop-shadow-gold absolute -bottom-7 left-[42%]"
           style={styles.text_bungee}
@@ -36,7 +47,7 @@ export default function StartGame() {
           <Text className="text-[30px] text-white" style={styles.text}>
             Olá{" "}
             <Text className="text-[30px] text-gold" style={styles.text}>
-              Nome
+              {username}
             </Text>
             !
           </Text>
@@ -50,7 +61,8 @@ export default function StartGame() {
         <GoldButton
           text="Jogar"
           onPress={() => {
-            console.log("cloquinha");
+            createNewQuestions();
+            navigation.navigate("Game");
           }}
         />
 

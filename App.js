@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Routes from "./src/routes";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { AuthProvider } from "./src/contexts/auth";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,8 +13,9 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
-  console.log("aaa");
-
-  return <Routes />;
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
 }
