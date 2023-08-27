@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 
-import Home from '../pages/home'
+import Game from '../pages/game'
 import { View } from 'react-native'
 
 const Stack = createNativeStackNavigator()
@@ -12,7 +12,7 @@ export default function Routes() {
       <Stack.Navigator>
         <Stack.Screen
           name='Home'
-          component={Home}
+          component={Game}
           options={{
             headerShown: false
           }}
