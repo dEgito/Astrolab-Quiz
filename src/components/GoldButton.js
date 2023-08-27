@@ -15,6 +15,18 @@ const styles = StyleSheet.create({
     fontFamily: "Inder",
     textAlign: "center",
   },
+  text_bungee: {
+    fontFamily: "Bungee",
+    textShadowColor: "rgba(255, 199, 0, 0.4)",
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   button: {
     backgroundColor: "#FFC700",
     width: 264,
