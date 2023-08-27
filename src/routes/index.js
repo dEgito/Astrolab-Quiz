@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Game from "../pages/game";
 import { View } from "react-native";
 import Home from "../pages/home";
+import FinalScore from "../pages/FinalScore/FinalScore";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ export default function Routes() {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={FinalScore}
           options={{
             headerShown: false,
           }}

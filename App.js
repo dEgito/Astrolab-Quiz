@@ -13,5 +13,7 @@ export default function App() {
     return <AppLoading />;
   }
 
+  console.log("aaa");
+
   return <Routes />;
 }
