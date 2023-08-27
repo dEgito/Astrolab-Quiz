@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 
 import Home from '../pages/home'
+import { View } from 'react-native'
 
 const Stack = createNativeStackNavigator()
 
