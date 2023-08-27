@@ -1,23 +1,24 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import Game from '../pages/game'
-import { View } from 'react-native'
+import Game from "../pages/game";
+import { View } from "react-native";
+import Home from "../pages/home";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name='Home'
-          component={Game}
+          name="Home"
+          component={Home}
           options={{
-            headerShown: false
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
