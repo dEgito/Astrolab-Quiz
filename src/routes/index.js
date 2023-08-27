@@ -34,6 +34,13 @@ export default function Routes() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="FinalScore"
+          component={FinalScore}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

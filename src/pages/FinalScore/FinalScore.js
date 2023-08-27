@@ -5,8 +5,12 @@ import Bg from "../../../assets/bg.png";
 import astrolabIcon from "../../../assets/astrolab-icon.png";
 import GoldButton from "../../components/GoldButton";
 import FooterText from "../../components/FooterText";
+import { useAuthContext } from "../../contexts/auth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function FinalScore() {
+  const { punctuation } = useAuthContext();
+  const navigation = useNavigation();
   let [fontsLoaded, fontError] = useFonts({
     Inder_400Regular,
     Poppins_600SemiBold,
@@ -19,13 +23,13 @@ export default function FinalScore() {
     <View style={styles.container}>
       <ImageBackground source={Bg} style={styles.backgroundAstrolab}>
         <Text style={styles.TextoPontuacao}>Sua pontuação final foi:</Text>
-        <Text style={styles.pontuacaoFinal}>100 pts!</Text>
+        <Text style={styles.pontuacaoFinal}>{punctuation} pts!</Text>
         <Image source={astrolabIcon} />
         <GoldButton
           style={{ fontFamily: "Inder_400Regular", fontSize: 3 }}
           text="Jogar novamente"
           onPress={() => {
-            console.log("testing");
+            navigation.navigate("StartGame");
           }}
         ></GoldButton>
       </ImageBackground>

@@ -53,7 +53,9 @@ export default function Home() {
         <Pressable
           style={styles.button}
           onPress={() => {
+            if (!text) return;
             setUsername(text);
+            setTimeout(() => onChangeText(""), 500);
             navigation.navigate("StartGame");
           }}
         >

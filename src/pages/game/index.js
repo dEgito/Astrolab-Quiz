@@ -8,15 +8,33 @@ import {
 } from "react-native";
 import LeftArrow from "../../../assets/icons/LeftArrow";
 import GoldButton from "../../components/GoldButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "../../contexts/auth";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Game() {
-  const [isTaped, onTaped] = useState("");
+  const { questions, setPunctuation, setBestPunctuation } = useAuthContext();
+  const [isTaped, onTaped] = useState(null);
+  const [actualQuestionIndex, setActualQuestionIndex] = useState(0);
+  const [answerArray, setAnswerArray] = useState([]);
+  const navigation = useNavigation();
+
+  const actualQuestion = questions[actualQuestionIndex];
 
   return (
     <View className="w-full h-full bg-primaryPurple pt-[20%]">
       <View className="px-[32px]">
-        <LeftArrow />
+        <Pressable
+          onPress={() => {
+            if (actualQuestionIndex === 0) {
+              navigation.navigate("StartGame");
+              return;
+            }
+            setActualQuestionIndex((index) => index - 1);
+          }}
+        >
+          <LeftArrow />
+        </Pressable>
         <Text
           className="text-[20px] text-gold drop-shadow-gold absolute -bottom-5 left-[42%]"
           style={styles.text_bungee}
@@ -34,61 +52,68 @@ export default function Game() {
             marginTop: 40,
           }}
         >
-          <Text className="text-gold mb-2">Pergunta 01</Text>
-          <Text style={styles.text_alternative}>
-            Qual é o nome do planeta mais próximo do Sol?
+          <Text className="text-gold mb-2">
+            Pergunta{" "}
+            {actualQuestionIndex !== 9 ? `0${actualQuestionIndex + 1}` : "10"}
           </Text>
+          <Text style={styles.text_alternative}>{actualQuestion.question}</Text>
         </View>
 
-        <Pressable
-          style={{
-            ...styles.button,
-            backgroundColor: isTaped === "a" ? "#FFC700" : "#333",
-          }}
-          onPress={(e) => {
-            onTaped("a");
-          }}
-        >
-          <Text style={styles.text_alternative}>A. Entrar</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            ...styles.button,
-            backgroundColor: isTaped === "b" ? "#FFC700" : "#333",
-          }}
-          onPress={() => {
-            onTaped("b");
-          }}
-        >
-          <Text style={styles.text_alternative}>B. Entrar</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            ...styles.button,
-            backgroundColor: isTaped === "c" ? "#FFC700" : "#333",
-          }}
-          onPress={() => {
-            onTaped("c");
-          }}
-        >
-          <Text style={styles.text_alternative}>C. Entrar</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            ...styles.button,
-            backgroundColor: isTaped === "d" ? "#FFC700" : "#333",
-            marginBottom: 16,
-          }}
-          onPress={() => {
-            onTaped("d");
-          }}
-        >
-          <Text style={styles.text_alternative}>D. Entrar</Text>
-        </Pressable>
+        {actualQuestion.alternatives.map((text, index) => (
+          <Pressable
+            style={{
+              ...styles.button,
+              backgroundColor:
+                isTaped === String.fromCharCode(65 + index)
+                  ? "#FFC700"
+                  : "#333",
+
+              marginBottom: index === 3 ? 16 : 0,
+            }}
+            onPress={(e) => {
+              onTaped(String.fromCharCode(65 + index));
+            }}
+          >
+            <Text
+              style={{
+                ...styles.text_alternative,
+                color:
+                  isTaped === String.fromCharCode(65 + index) ? "#333" : "#fff",
+              }}
+            >
+              {String.fromCharCode(65 + index)}. {text}
+            </Text>
+          </Pressable>
+        ))}
+
         <GoldButton
           text="Responder"
           onPress={() => {
-            console.log("cloquinha");
+            if (isTaped === null) return;
+            const arrayIndex = isTaped.charCodeAt(0) - 65;
+            const selectedAnswer = actualQuestion.alternatives[arrayIndex];
+            const questionPunctuation =
+              selectedAnswer === actualQuestion.correct ? 10 : 0;
+
+            if (actualQuestionIndex === 9) {
+              const punctuation = answerArray.reduce(
+                (partialSum, a) => partialSum + a,
+                questionPunctuation
+              );
+              setPunctuation(punctuation);
+              setBestPunctuation((oldPunctuation) =>
+                punctuation > oldPunctuation ? punctuation : oldPunctuation
+              );
+              navigation.navigate("FinalScore");
+              return;
+            }
+
+            setAnswerArray((answerArray) => [
+              ...answerArray,
+              questionPunctuation,
+            ]);
+            onTaped(null);
+            setActualQuestionIndex((index) => index + 1);
           }}
         />
       </ImageBackground>

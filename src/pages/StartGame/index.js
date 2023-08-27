@@ -17,7 +17,7 @@ import { useAuthContext } from "../../contexts/auth";
 
 export default function StartGame() {
   const navigation = useNavigation();
-  const { username, punctuation, questions, createNewQuestions } =
+  const { username, punctuation, questions, createNewQuestions, resetGame } =
     useAuthContext();
 
   return (
@@ -25,6 +25,7 @@ export default function StartGame() {
       <View className="px-[32px] h-2">
         <Pressable
           onPress={() => {
+            resetGame();
             navigation.goBack();
           }}
         >
@@ -60,7 +61,8 @@ export default function StartGame() {
         <GoldButton
           text="Jogar"
           onPress={() => {
-            navigation.navigate("");
+            createNewQuestions();
+            navigation.navigate("Game");
           }}
         />
 

@@ -4,14 +4,21 @@ import questionsMock from "../mocks/questionsMock";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [username, setUsername] = useState("abs");
+  const [username, setUsername] = useState("");
   const [punctuation, setPunctuation] = useState(0);
+  const [bestPunctuation, setBestPunctuation] = useState(0);
   const [questions, setQuestions] = useState(
     shuffleArray(questionsMock).slice(0, 11)
   );
 
   const createNewQuestions = () => {
     setQuestions(shuffleArray(questionsMock).slice(0, 11));
+  };
+
+  const resetGame = () => {
+    setUsername("");
+    setPunctuation(0);
+    setBestPunctuation(0);
   };
 
   return (
@@ -21,8 +28,11 @@ export function AuthProvider({ children }) {
         setUsername,
         punctuation,
         setPunctuation,
+        bestPunctuation,
+        setBestPunctuation,
         questions,
         createNewQuestions,
+        resetGame,
       }}
     >
       {children}
