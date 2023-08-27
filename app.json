@@ -4,10 +4,8 @@
     "slug": "Astrolab",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "",
-    "userInterfaceStyle": "light",
+    "userInterfacetyle": "light",
     "splash": {
-      "image": "",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
