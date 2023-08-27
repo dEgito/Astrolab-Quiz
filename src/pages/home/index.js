@@ -10,9 +10,13 @@ import {
   Pressable,
 } from "react-native";
 import Bg from "../../../assets/background.png";
+import { useNavigation } from "@react-navigation/native";
+import { useAuthContext } from "../../contexts/auth";
 
 export default function Home() {
   const [text, onChangeText] = useState("");
+  const navigation = useNavigation();
+  const { setUsername } = useAuthContext();
 
   return (
     <View style={styles.container}>
@@ -46,7 +50,13 @@ export default function Home() {
           onChangeText={onChangeText}
           value={text}
         />
-        <Pressable style={styles.button} onPress={() => {}}>
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            setUsername(text);
+            navigation.navigate("StartGame");
+          }}
+        >
           <Text style={{ fontFamily: "Inder" }}>Entrar</Text>
         </Pressable>
       </ImageBackground>
