@@ -1,10 +1,10 @@
-import { Dimensions, ImageBackground, StyleSheet, Text, View, Image} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Image} from 'react-native';
 import {useFonts,  Inder_400Regular } from '@expo-google-fonts/inder';
 import {Poppins_600SemiBold} from '@expo-google-fonts/poppins';
-import Bg from '../../assets/bg.png';
-import astrolabIcon from '../../assets/astrolab-icon.png'
+import Bg from '../../../assets/bg.png'
+import astrolabIcon from '../../../assets/astrolab-icon.png';
 import GoldButton from '../../componentes/GoldenButton';
-import FooterText from '../componentes/FooterText';
+import FooterText from '../../componentes/FooterText';
 
 export default function FinalScore(){
     let [fontsLoaded, fontError] = useFonts({
@@ -23,9 +23,8 @@ export default function FinalScore(){
           <GoldButton
               style={{fontFamily: 'Inder_400Regular', fontSize: 3}}
               text = 'Jogar novamente'
-              onPress={() => {console.log("cloquinha");}}
+              onPress={() => {console.log("testing");}}
             >
-              <Text style={styles.AstrolabFooter}>Oieeeeeeeeeeee</Text>
           </GoldButton>
         </ImageBackground>
         <FooterText/>
