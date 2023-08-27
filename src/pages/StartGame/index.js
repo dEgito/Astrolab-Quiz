@@ -1,4 +1,5 @@
 import {
+  Image,
   ImageBackground,
   Pressable,
   StatusBar,
@@ -8,14 +9,19 @@ import {
 } from "react-native";
 import LeftArrow from "../../../assets/icons/LeftArrow";
 import GoldButton from "../../components/GoldButton";
+import BackgroundImage from "../../../assets/background.png";
+import ImagePlanet from "../../../assets/image_1.png";
+import { useState } from "react";
 
 export default function StartGame() {
+  const [punctuation, setPunctuation] = useState(0);
+
   return (
-    <View className="w-full h-full bg-primaryPurple pt-[20%]">
-      <View className="px-[32px]">
+    <View className="w-full h-full bg-primaryPurple pt-[15%]">
+      <View className="px-[32px] h-2">
         <LeftArrow />
         <Text
-          className="text-[20px] text-gold drop-shadow-gold absolute -bottom-5 left-[42%]"
+          className="text-[20px] text-gold drop-shadow-gold absolute -bottom-7 left-[42%]"
           style={styles.text_bungee}
         >
           ASTROLAB
@@ -23,7 +29,7 @@ export default function StartGame() {
       </View>
       <ImageBackground
         className="bg-black rounded-[30px_30px_0px_0px] mt-[30px]"
-        source={require("../../../assets/background.png")}
+        source={BackgroundImage}
         style={styles.image}
       >
         <View className="justify-center items-center relative -top-14">
@@ -41,27 +47,22 @@ export default function StartGame() {
             Vamos dar início à sua jornada?
           </Text>
         </View>
-        {/* <Pressable
-          style={styles.button}
-          onPress={() => {
-            console.log("abapo");
-          }}
-        >
-          <Text className="text-[20px] text-black" style={styles.text}>
-            Jogar
-          </Text>
-        </Pressable> */}
         <GoldButton
           text="Jogar"
           onPress={() => {
             console.log("cloquinha");
           }}
         />
+
+        <Image source={ImagePlanet} />
         <Text
-          className="text-[20px] text-gold drop-shadow-gold absolute bottom-10"
-          style={styles.text_bungee}
+          className="text-[20px] text-white absolute bottom-10"
+          style={styles.text}
         >
-          ASTROLABS
+          Recorde:{" "}
+          <Text className="text-gold" style={styles.text}>
+            {punctuation} pts
+          </Text>
         </Text>
       </ImageBackground>
       <StatusBar style="auto" />
@@ -72,7 +73,6 @@ export default function StartGame() {
 const styles = StyleSheet.create({
   text: {
     fontFamily: "Inder",
-    textAlign: "center",
   },
   text_bungee: {
     fontFamily: "Bungee",
